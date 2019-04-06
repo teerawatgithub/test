@@ -15,7 +15,7 @@ app.post("/login", (req, res) => {
             "password": req.body.password,
         }
         console.log(user)
-        dbo.collection("user").find(user).toArray(function(err, result) {
+        dbo.collection("user").find(user).toArray(function (err, result) {
             if (err) {
                 res.sendStatus(404)
                 console.log(result)
@@ -28,6 +28,27 @@ app.post("/login", (req, res) => {
                 }
             }
         })
+    });
+})
+
+app.post("/updateStudents", (req, res) => {
+    console.log("malaw")
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("ooad");
+        var query_ID = { student_ID : "59160069" }
+        var update = {
+            $set:
+            {
+                firstName : "teerawat"
+            }
+        }
+        // console.log(user)
+        dbo.collection("Students").updateOne(query_ID, update, function (err, result) {
+            if (err) return next(err);
+            console.log(result)
+           // res.send('Product udpated.');
+        });
     });
 })
 module.exports = app;

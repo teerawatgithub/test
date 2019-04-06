@@ -10,6 +10,12 @@
 
     <title>จัดการข้อมูลเจ้าหน้าที่</title>
 
+    <!-- javascript -->
+    <script src="./../../js/user/staff.js"></script>
+
+    <!-- ajax link -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <!-- Bootstrap core CSS -->
     <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -147,6 +153,7 @@
             $(document).on("click", ".add", function () {
                 var empty = false;
                 var input = $(this).parents("tr").find('input[type="text"]');
+                // check input is true?
                 input.each(function () {
                     if (!$(this).val()) {
                         $(this).addClass("error");
@@ -157,9 +164,14 @@
                 });
                 $(this).parents("tr").find(".error").first().focus();
                 if (!empty) {
+
+                    //add value to row
+                    updateStaff();
                     input.each(function () {
                         $(this).parent("td").html($(this).val());
                     });
+
+                    //revers button
                     $(this).parents("tr").find(".add, .edit").toggle();
                     $(".add-new").removeAttr("disabled");
                 }

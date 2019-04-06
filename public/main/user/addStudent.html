@@ -10,6 +10,12 @@
 
     <title>จัดการข้อมูลนิสิต</title>
 
+    <!-- javascript -->
+    <script src="./../../js/user/students.js"></script>
+
+    <!-- ajax link -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <!-- Bootstrap core CSS -->
     <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -18,6 +24,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -129,6 +136,7 @@
             $(document).on("click", ".add", function () {
                 var empty = false;
                 var input = $(this).parents("tr").find('input[type="text"]');
+                //check befor add
                 input.each(function () {
                     if (!$(this).val()) {
                         $(this).addClass("error");
@@ -139,9 +147,13 @@
                 });
                 $(this).parents("tr").find(".error").first().focus();
                 if (!empty) {
+                    //add value to row
+//************************* updateStudents(); ******************************
                     input.each(function () {
                         $(this).parent("td").html($(this).val());
                     });
+
+                    //switch button
                     $(this).parents("tr").find(".add, .edit").toggle();
                     $(".add-new").removeAttr("disabled");
                 }
@@ -155,6 +167,11 @@
                 $(".add-new").attr("disabled", "disabled");
             });
             // Delete row on delete button click
+
+            //delete in database
+            deleteStudents()
+
+            //delete on template
             $(document).on("click", ".delete", function () {
                 $(this).parents("tr").remove();
                 $(".add-new").removeAttr("disabled");
